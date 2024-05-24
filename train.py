@@ -1,6 +1,5 @@
 import torch
 import numpy as np
-from flows import RectifiedFlow
 import torch.nn as nn
 import tensorboardX
 import os
@@ -56,7 +55,6 @@ def get_args():
     parser.add_argument('--z_dir', type=str, help='zs dir')
     parser.add_argument('--dir', type=str, help='Saving directory name')
     parser.add_argument('--tmpdir', type=str, help='Temporary directory', default=None)
-    parser.add_argument('--weight_cur', type=float, default = 0, help='Curvature regularization weight')
     parser.add_argument('--iterations', type=int, default = 1000000, help='Number of iterations')
     parser.add_argument('--batchsize', type=int, default = 4, help='Batch size')
     parser.add_argument('--effective_batchsize', type=int, default = None, help='Effective batch size. If None, same as batchsize. If larger than batchsize, gradient accumulation is used')
@@ -64,7 +62,6 @@ def get_args():
     parser.add_argument('--resume', type=str, default = None, help='Training state path')
     parser.add_argument('--ckpt', type=str, default = None, help='Model ckpt path')
     parser.add_argument('--N', type=int, default = 32, help='Number of sampling steps')
-    parser.add_argument('--num_samples', type=int, default = 64, help='Number of samples to generate')
     parser.add_argument('--no_ema', action='store_true', help='use EMA or not')
     parser.add_argument('--ema_after_steps', type=int, default = 1, help='Apply EMA after steps')
     parser.add_argument('--ema_decay', type=float, default = 0.9999, help='EMA decay rate')
@@ -72,14 +69,12 @@ def get_args():
     parser.add_argument('--optimizer', type=str, default = 'adam', help='adam / adamw')
     parser.add_argument('--warmup_steps', type=int, default = 0, help='Learning rate warmup')
     parser.add_argument('--config_de', type=str, default = None, help='Decoder config path, must be .json file')
-    parser.add_argument('--distill', action='store_true', help='Distill or not')
     parser.add_argument('--t_dist', type=str, default = 'uniform', help='weighting, [uniform, exponential-inc, exponential-dec]')
     parser.add_argument('--a', type=float, default = 2, help='alpha for exponential distribution')
     parser.add_argument('--loss_type', type=str, default = 'l2', help='loss type, [l2, lpips, huber]')
     parser.add_argument('--port', type=int, default = 12354, help='Port number')
     parser.add_argument('--num_workers', type=int, default=1, help='number of workers')
 
-    parser.add_argument('--edm', action='store_true', help='EDM or not')
 
     parser.add_argument('--compile', action='store_true', help='Compile the model')
     parser.add_argument('--subset', type=int, default = None, help='Subset of the dataset')
@@ -87,10 +82,7 @@ def get_args():
     parser.add_argument('--loss_scaling', type=float, default = 1, help='Loss scaling factor')
 
     parser.add_argument('--lpips_divt', action='store_true', help='Divide lpips by t')
-    parser.add_argument('--lpips_mult', action='store_true', help='Multiply lpips by t')
-    parser.add_argument('--lpips_z', action='store_true', help='Use z for lpips')
 
-    parser.add_argument('--self_distill', action='store_true', help='Self distillation')
     arg = parser.parse_args()
 
     arg.use_ema = not arg.no_ema

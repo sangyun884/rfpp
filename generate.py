@@ -2,7 +2,6 @@
 
 import torch
 import numpy as np
-from flows import RectifiedFlow
 import torch.nn as nn
 # import tensorboardX
 import os
