@@ -1,0 +1,26 @@
+{
+    "unet_type" : "adm",
+    "img_resolution": 64,
+    "in_channels": 3,
+    "out_channels": 3,
+    "label_dim": 1000,
+    "augment_dim": 0,
+    "model_channels": 192,
+    "channel_mult": [
+        1,
+        2,
+        3,
+        4
+    ],
+    "channel_mult_emb": 4,
+    "num_blocks": 3,
+    "attn_resolutions": [
+        32,
+        16,
+        8
+    ],
+    "dropout": 0.10,
+    "label_dropout": 0,
+    "num_params": 55.732739,
+    "use_fp16": true
+}
