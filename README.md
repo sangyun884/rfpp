@@ -27,7 +27,7 @@ You can download inception statistics from [here](https://drive.google.com/drive
 ### Image to image translation
 Lion (291) -> Tiger (292):
 ```
-python generate.py --gpu 0 --dir runs/test-inversion --solver euler --N 4 --N_decode 2 --batchsize 6 --ckpt imagenet-configE.pth --config configs_unet/imagenet64.json --action inversion \
+python generate.py --gpu 0 --dir runs/test-inversion --solver euler --N 4 --N_decode 2 --batchsize 6 --ckpt imagenet-configF.pth --config configs_unet/imagenet64.json --action inversion \
 --data_path imagenet-samples/n02129165/ --num_samples 6 --sampler new --label_inv 291 --label_rec 292
 ```
 
