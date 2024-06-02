@@ -80,5 +80,10 @@ python train.py --gpu 0,1,2,3,4,5,6,7 --dir runs/test-afhq --learning_rate 2e-4 
 
 ## Citation
 ```
-TBA
+@article{lee2024improving,
+  title={Improving the Training of Rectified Flows},
+  author={Lee, Sangyun and Lin, Zinan and Fanti, Giulia},
+  journal={arXiv preprint arXiv:2405.20320},
+  year={2024}
+}
 ```
