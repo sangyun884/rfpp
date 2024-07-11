@@ -1,6 +1,6 @@
 # 2-Rectified Flow++
 
-This is the codebase of our paper "Improving the Training of Rectified Flows".
+This is the codebase of our paper [Improving the Training of Rectified Flows](https://arxiv.org/abs/2405.20320).
 
 ## Setup
 Tested environment: PyTorch >= 2.0.0, Linux.
